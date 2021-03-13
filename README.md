@@ -29,3 +29,7 @@ Command to reorder column view in Linux-
 (Server,IP,TCP,Instance,Named Pipe,DNS)
 
 ` sed 's/\r//' parsed-mssql.csv | awk -F, '{print $3,$1,$5,$4,$6,$2}' OFS=, `
+
+Linux command to sort (but keeping the first header row unchanged)
+
+` sed 's/\r//' parsed-mssql.csv | awk -F, '{print $3,$1,$5,$4,$6,$2}' OFS=, | (read -r; printf "%s\n" "$REPLY"; sort)   `
