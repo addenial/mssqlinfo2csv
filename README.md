@@ -29,6 +29,8 @@ Show but supress first row:
 
 `awk 'NR>1' parsed-mssql.csv  `
 
+`awk 'NR>1' parsed-mssql.csv | cut -d, -f1,5  `
+
 Command to reorder column view in Linux-
 (Server,IP,TCP,Instance,Named Pipe,DNS)
 
