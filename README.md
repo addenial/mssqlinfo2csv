@@ -25,6 +25,9 @@ View only IP and TCP port of the available mssql database instances:
 
 `cat parsed-mssql.csv | cut -d, -f1,5  `
 
+Show but supress first row:
+`awk 'NR>1' parsed-mssql.csv  `
+
 Command to reorder column view in Linux-
 (Server,IP,TCP,Instance,Named Pipe,DNS)
 
