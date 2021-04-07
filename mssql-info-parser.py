@@ -126,8 +126,11 @@ def parsZZ(parMEplz):
             x = line.split(": ")
             #print(x[1])
             #instanceTEMP.append(x[1])
-            d[instanceTEMP[b]].append(x[1])
-            b=b+1
+            try:
+                d[instanceTEMP[b]].append(x[1])
+                b=b+1
+            except (IndexError,KeyError):
+                continue
         #NAMEDPIPE
         if "Named pipe" in line:
             x = line.split(": ")
