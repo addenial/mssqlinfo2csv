@@ -31,6 +31,8 @@ Show but supress first row:
 
 `awk 'NR>1' parsed-mssql.csv | cut -d, -f1,5  `
 
+`awk 'NR>1' parsed-mssql.csv | cut -d, -f1,5  >  mssql_targets-ip-port.log `
+
 Command to reorder column view in Linux-
 (Server,IP,TCP,Instance,Named Pipe,DNS)
 
