@@ -3,14 +3,14 @@ Script to convert nmap ms-sql-info XML output to a CSV file
 
 Currently the script pulls and parses the following fields of interest:
 
-`IP,DNS,Server,Instance,TCP,Named Pipe`
+`IP,TCPport,Winservername,Instance,ProductVersionName,Named Pipe`
 
 Fields details~
 IP Address,
-DNS Hostname,
+Instance TCP Port,
 Windows Server Name,
 SQL Server Instance,
-Instance TCP Port,
+SQL Version Product Name Number Service Pack,
 Instance Named Pipe
 
 ## Usage
@@ -19,25 +19,20 @@ Instance Named Pipe
 ## Examples
 Parse and output to file:
 
-`python ./mssql-info-parser.py results-ms-sql-info.xml > parsed-mssql.csv `
+`python ./mssql-info-parser.py results-ms-sql-info.xml `
 
-View only IP and TCP port of the available mssql database instances:
 
-`cat parsed-mssql.csv | cut -d, -f1,5  `
+#ip,port - use for pw guessing
 
-Show but supress first row:
+`python3 mssql-info-parser.py results-ms-sql-info.xml | cut -d, -f1,2`
+#
+#ip,port,winhostname,instancename,namedpipe
 
-`awk 'NR>1' parsed-mssql.csv  `
+`python3 mssql-info-parser.py results-ms-sql-info.xml | cut -d, -f1,2,3,4,10`
+#
 
-`awk 'NR>1' parsed-mssql.csv | cut -d, -f1,5  `
 
-`awk 'NR>1' parsed-mssql.csv | cut -d, -f1,5  >  mssql_targets-ip-port.log `
 
-Command to reorder column view in Linux-
-(Server,IP,TCP,Instance,Named Pipe,DNS)
 
-` sed 's/\r//' parsed-mssql.csv | awk -F, '{print $3,$1,$5,$4,$6,$2}' OFS=, `
 
-Linux command to sort (but keeping the first header row unchanged)
 
-` sed 's/\r//' parsed-mssql.csv | awk -F, '{print $3,$1,$5,$4,$6,$2}' OFS=, | (read -r; printf "%s\n" "$REPLY"; sort)   `
